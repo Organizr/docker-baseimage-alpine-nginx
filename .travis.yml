@@ -1,0 +1,13 @@
+sudo: required
+services:
+  - docker
+language: bash
+script:
+  # Build image
+  - docker build -t tronyx/base-alpine-nginx .
+  # Test image
+  - docker run tronyx/base-alpine-nginx nginx -v
+after_success:
+  # Push image if not a PR
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" ${DOCKER_REGISTRY}; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then docker push tronyx/base-alpine-nginx; fi'
