@@ -37,7 +37,12 @@ RUN \
 	/etc/nginx/fastcgi_params && \
  rm -f /etc/nginx/conf.d/default.conf && \
  echo "**** fix logrotate ****" && \
- sed -i "s#/var/log/messages {}.*# #g" /etc/logrotate.conf
+ sed -i "s#/var/log/messages {}.*# #g" /etc/logrotate.conf && \
+ echo "**** cleanup ****" && \
+ apk del --purge \
+	build-dependencies && \
+ rm -rf \
+	/tmp/*
 
 # add local files
 COPY root/ /
