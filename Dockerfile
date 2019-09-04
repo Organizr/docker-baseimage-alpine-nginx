@@ -1,4 +1,4 @@
-FROM tronyx/base-alpine
+FROM organizrtools/base-alpine
 LABEL MAINTAINER="organizrTools,christronyxyocum"
 
 # install packages
@@ -6,6 +6,7 @@ RUN \
  echo "**** install build packages ****" && \
  apk add --no-cache \
 	apache2-utils \
+  curl \
 	git \
 	libressl2.7-libssl \
 	logrotate \
@@ -22,6 +23,14 @@ RUN \
 	php7-simplexml \
 	php7-xml \
 	php7-xmlwriter \
+  php7-curl \
+	php7-ldap \
+	php7-pdo_sqlite \
+	php7-sqlite3 \
+	php7-session \
+	php7-zip \
+	php7-xmlrpc \
+	php7-ftp \
 	php7-zlib && \
  echo "**** configure nginx ****" && \
  echo 'fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;' >> \
