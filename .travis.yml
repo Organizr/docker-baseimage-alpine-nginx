@@ -6,7 +6,7 @@ script:
   # Build image
   - docker build -t organizrtools/base-alpine-nginx .
   # Test image
-  - docker run organizrtools/base-alpine-nginx nginx -v
+  - docker run -p 8080:80 organizrtools/base-alpine-nginx nginx -v
 after_success:
   # Push image if not a PR
   - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then docker login -u "$DOCKER_USER" -p "$DOCKER_PASS" ${DOCKER_REGISTRY}; fi'
